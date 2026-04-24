@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+video-ai/
+
+# Conda
+*.conda
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Data & outputs
+uploads/
+outputs/
+
+# Videos
+*.mp4
+*.avi
+*.mov
+
+# Model files (optional)
+# Uncomment if file is large
+# models/autoencoder.pth
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
