@@ -6,6 +6,7 @@ from video_processor import analyze_video
 from ai_video_processor import analyze_video_ai
 from hybrid_video_processor import analyze_video_hybrid
 from traffic_video_processor import analyze_traffic_video
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(
     title="Real-Time Video Anomaly Detection API",
@@ -20,6 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
 
 
 @app.get("/")

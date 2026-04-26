@@ -226,7 +226,7 @@ def analyze_traffic_video(video_path, output_dir="outputs"):
                 "frame_number": total_frames,
                 "object_count": current_frame_count,
                 "objects": sorted(set(objects_in_frame)),
-                "saved_frame": output_path
+                "saved_frame": output_path.replace("\\", "/")
             })
 
     cap.release()
