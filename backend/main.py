@@ -4,6 +4,8 @@ import shutil
 import os
 from video_processor import analyze_video
 from ai_video_processor import analyze_video_ai
+from hybrid_video_processor import analyze_video_hybrid
+from traffic_video_processor import analyze_traffic_video
 
 app = FastAPI(
     title="Real-Time Video Anomaly Detection API",
@@ -56,6 +58,40 @@ async def analyze_uploaded_video_ai(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
 
     result = analyze_video_ai(file_path)
+
+    return {
+        "filename": file.filename,
+        "result": result
+    }
+
+@app.post("/analyze-video-hybrid")
+async def analyze_uploaded_video_hybrid(file: UploadFile = File(...)):
+    upload_dir = "uploads"
+    os.makedirs(upload_dir, exist_ok=True)
+
+    file_path = os.path.join(upload_dir, file.filename)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    result = analyze_video_hybrid(file_path)
+
+    return {
+        "filename": file.filename,
+        "result": result
+    }
+
+@app.post("/analyze-traffic-video")
+async def analyze_traffic(file: UploadFile = File(...)):
+    upload_dir = "uploads"
+    os.makedirs(upload_dir, exist_ok=True)
+
+    file_path = os.path.join(upload_dir, file.filename)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    result = analyze_traffic_video(file_path)
 
     return {
         "filename": file.filename,
